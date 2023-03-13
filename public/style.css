@@ -274,6 +274,7 @@ th, td{
 
 .container-table-team1, .container-table-team2, .container-table-score{
     background-color: rgba(255, 255, 255, 0.1);
+    box-shadow: .1rem .1rem .5rem 0rem rgba(0, 0, 0, 0.4);
     padding: 1rem 2rem;
     border-radius: 1rem;
 }
@@ -299,14 +300,14 @@ th, td{
 }
 
 .table-header-team1 ,.table-data-team1{
-    padding-left: 2rem;
+    padding-left: 1.5rem;
 }
 .table-header-team2 ,.table-data-team2{
-    padding-right: 2rem;
+    padding-right: 1.5rem;
 }
 
 .table-data-score{
-    padding: 0 2rem;
+    padding: 0 1.5rem;
 }
 
 .table-header-score, .table-data-score{
