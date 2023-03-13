@@ -14,14 +14,9 @@ app.use((req, res, next) => {
 let data
 try {
     const data1 = JSON.parse(fs.readFileSync('./public/api/game/943.json').toString())
-    const data2 = JSON.parse(fs.readFileSync('./public/api/game/943/statistics.json').toString())   
-    // const stats = JSON.parse(fs.readFileSync('./public/js-stats/calculate-stats.js').toString())   
-    console.log(data1)
-    console.log(data2) 
-    // console.log(stats)
-
+    const data2 = JSON.parse(fs.readFileSync('./public/api/game/943/statistics.json').toString())
     data = Object.assign({}, data1, data2)
-    // console.log(data) 
+    console.log(data) 
 } catch (err) {
     console.error(err)
 }

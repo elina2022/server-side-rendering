@@ -192,7 +192,7 @@ nav{
 }
 
 #team-name-1, #team-name-2{
-    background-color: var(--accent-2)gamesta;
+    background-color: var(--accent-2);
     /* color: var(--accent-1); */
     white-space: nowrap;
     margin: 0;
@@ -256,30 +256,67 @@ main{
     margin-bottom: 5rem;
 }
 
+th, td{    
+    font-family: 'Merriweather', serif;
+}
+
+.table-data-name-team1, .table-data-name-team2{
+    font-size: .9rem;   
+}
+
 .container-tables{
     display: flex;
     justify-content: space-between;
     max-width: 85vw;
     margin: auto;
     margin-top: 7rem;
-
 }
 
-.table-scored-points{
-    order: 2;
-    background: rgba(255, 255, 255, 0.1);
-    border-spacing: 1rem;
+.container-table-team1, .container-table-team2, .container-table-score{
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 1rem 2rem;
     border-radius: 1rem;
 }
 
-.table-header-team1, .table-header-team2, .table-data-team1, .table-data-team2, .table-header-score, .table-data-score{
-    border-bottom: .5rem solid ;
+.container-table-score{
+    order: 2;
+}
+
+
+
+.table-scored-points{
+    /* background: rgba(255, 255, 255, 0.1); */
+    /* border-spacing: 1rem; */
+    /* padding: 1rem 2rem; */
+    /* border-radius: 1rem; */
+    border-collapse: collapse;
+}
+
+.table-header-team1, .table-header-team2, .table-data-team1, .table-data-team2, .table-header-score{
+    border-bottom: .5rem solid;
+    line-height: 2.5rem;
     /* text-align: center; */
+}
+
+.table-header-team1 ,.table-data-team1{
+    padding-left: 2rem;
+}
+.table-header-team2 ,.table-data-team2{
+    padding-right: 2rem;
+}
+
+.table-data-score{
+    padding: 0 2rem;
+}
+
+.table-header-score, .table-data-score{
+    font-size: 1.1rem;
+    /* border-color: var(--accent-1); */
 }
 
 .table-header-score, .table-header-team1, .table-header-team2{
     border-color: var(--accent-1);
+    /* background-image: linear-gradient(to bottom, transparent 50%, var(--accent-1) 50%, var(--accent-1) 80%, transparent 80%); */
 }
 
 
@@ -289,6 +326,27 @@ main{
 
 .table-header-team2, .table-data-team2{
     text-align: right;
+}
+
+
+.conceded{
+    border-color: rgb(250, 141, 141);
+    /* background-image: linear-gradient(to bottom, transparent 50%, rgb(250, 141, 141) 50%, rgb(250, 141, 141) 80%, transparent 80%); */
+}
+
+.hold{
+    border-color: rgb(33, 226, 104);
+    /* background-image: linear-gradient(to bottom, transparent 50%, rgb(33, 226, 104) 50%, rgb(33, 226, 104) 80%, transparent 80%); */
+}
+
+.broken{
+    border-color: rgb(128, 0, 0);
+    /* background-image: linear-gradient(to bottom, transparent 50%, rgb(128, 0, 0) 50%, rgb(128, 0, 0) 80%, transparent 80%); */
+}
+
+.break  {
+    border-color: rgb(13, 92, 1);
+    /* background-image: linear-gradient(to bottom, transparent 50%, rgb(13, 92, 1) 50%, rgb(13, 92, 1) 80%, transparent 80%); */
 }
 
 
@@ -308,12 +366,6 @@ main{
 
 .container-table-team2{
     order: 3;
-}
-
-.container-table-team1, .container-table-team2{
-    background-color: rgba(255, 255, 255, 0.1);
-    padding: 1rem 2rem;
-    border-radius: 1rem;
 }
 
 .table-team1, .table-team2{

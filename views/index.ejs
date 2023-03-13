@@ -55,7 +55,7 @@
 <div class="container-table<%= whichTeam %>">
 <table class="table<%= whichTeam %>">
 <% team.forEach(player =>{ %>
-    <% let gender = player.gender === "M" ? "-male" : "-female" %>
+    <% let gender = player.gender === "M" ? "-male" : "-female" %> 
     <tr class="table-row<%= whichTeam + gender %>">
         <% if(team1Players.some(player1 => player1.playerId === player.playerId)){ %>
             <td class="table-data-id-team1">
@@ -133,32 +133,32 @@
 
 
 
-
-<table class="table-scored-points">
-    <thead class="table-head-scored-points">
-        <tr class="table-row-header-scored-points">
-            <th class="table-header-team1">Pass</th>
-            <th class="table-header-team1">Turn</th>
-            <th class="table-header-team1">O/D</th>
-            <th class="table-header-score">Score</th>
-            <th class="table-header-team2">O/D</th>
-            <th class="table-header-team2">Turn</th>
-            <th class="table-header-team2">Pass</th>
+<div class="container-table-score">
+    <table class="table-scored-points">
+        <thead class="table-head-scored-points">
+            <tr class="table-row-header-scored-points">
+                <th class="table-header-team1">Pass</th>
+                <th class="table-header-team1">Turn</th>
+                <th class="table-header-team1">O/D</th>
+                <th class="table-header-score">Score</th>
+                <th class="table-header-team2">O/D</th>
+                <th class="table-header-team2">Turn</th>
+                <th class="table-header-team2">Pass</th>
+            </tr>
+        </thead>
+    <% scoredPoints.forEach(SP =>{ %>
+        <tr class="table-row-data-scored-points">
+            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Passes %></td>
+            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Turnovers %></td>
+            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1OorD %></td>
+            <td class="table-data-score"><%= SP.team1Score %> - <%= SP.team2Score %></td>
+            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2OorD %></td>
+            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Turnovers %></td>
+            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Passes %></td>
         </tr>
-    </thead>
-<% scoredPoints.forEach(SP =>{ %>
-    <tr class="table-row-data-scored-points">
-        <td class="table-data-team1"><%= SP.team1Passes %></td>
-        <td class="table-data-team1"><%= SP.team1Turnovers %></td>
-        <td class="table-data-team1"><%= SP.team1OorD.toLowerCase() %></td>
-        <td class="table-data-score"><%= SP.team1Score %> - <%= SP.team2Score %></td>
-        <td class="table-data-team2"><%= SP.team2OorD.toLowerCase() %></td>
-        <td class="table-data-team2"><%= SP.team2Turnovers %></td>
-        <td class="table-data-team2"><%= SP.team2Passes %></td>
-    </tr>
-<% }) %>
-</table> 
-
+    <% }) %>
+    </table> 
+</div>
 
 
 </div>
