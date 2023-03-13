@@ -1,0 +1,168 @@
+<%- include("./partials/head.ejs") %>
+<div id="grain"></div>
+
+<header>
+    <div class="container-logo-game-name">
+        <div class="container-logo-text">
+            <img id="logo" src="/assets/logo.png" alt="">
+            <img id="logo-text" src="/assets/logo-text.png" alt="">
+        </div>
+        <p id="game-name-header"><%= gameStatus %></p>
+    </div>
+    <nav>
+        <ul class="nav-ul" >
+            <li class="nav-item">Teams</li>
+            <li class="nav-item">Surveys</li>
+            <li class="nav-item">VMix</li>
+            <li class="nav-item">Tournaments <img class="arrow" src="/assets/arrow.svg" alt=""></li>
+            <li class="nav-item">Admin <img class="arrow" src="/assets/arrow.svg" alt=""></li>
+        </ul>
+        <p id="admin-name"><%= playByPlayCommentatorName %> <img class="arrow" src="/assets/arrow.svg" alt=""></p>
+    </nav>
+</header>
+
+
+
+<main>
+
+<div class="container-score-board">
+    <div class="container-flag-team-name">
+        <div id="container-flag-team-name-1">
+            <img id="flag-1" src="https://flagsapi.com/<%= team1CountryISO2Code %>/flat/64.png" alt="">
+            <h1 id="team-name-1">(<%= team1CountryOlympicCode %>) <%= team1Name %></h1>
+        </div>
+        <div id="container-flag-team-name-2">
+            <h1 id="team-name-2"><%= team2Name %> (<%= team2CountryOlympicCode %>)</h1>
+            <img id="flag-2" src="https://flagsapi.com/<%= team2CountryISO2Code %>/flat/64.png" alt="">
+        </div>
+    </div>
+    <div id="container-img-score">
+        <img id="frisbee-man" src="/assets/man-frisbee-color-green-beige.png" alt="">
+        <div id="container-score"></div>
+        <p id="score"><%= scoredPoints[scoredPoints.length-1].team1Score %> - <%= scoredPoints[scoredPoints.length-1].team2Score %></p>
+    </div>
+</div>
+
+
+
+<div class="container-tables">
+
+<% 
+    const bothTeams = [team1Players, team2Players] 
+    bothTeams.forEach((team, index) => {
+    let whichTeam = (index === 0) ? "-team1" : "-team2"
+%>
+<div class="container-table<%= whichTeam %>">
+<table class="table<%= whichTeam %>">
+<% team.forEach(player =>{ %>
+    <% let gender = player.gender === "M" ? "-male" : "-female" %>
+    <tr class="table-row<%= whichTeam + gender %>">
+        <% if(team1Players.some(player1 => player1.playerId === player.playerId)){ %>
+            <td class="table-data-id-team1">
+                <%= player.jerseyNumber %>
+            </td>
+        <% } %>
+        <% if(team1Players.some(player1 => player1.playerId === player.playerId)){ %>
+            <td class="table-data-name-team1">
+                <%= player.name %>
+            </td>
+        <% } %>    
+        <td class="table-data-nums<%= whichTeam %>">
+            <ul class="ul-nums<%= whichTeam %>">
+                <% 
+                let count_goals_assists = nameBy =>{
+                    return scoredPoints.filter(scoredPoint => scoredPoint[nameBy] === player.playerId).length
+                } 
+                let numGoals = count_goals_assists("scoredBy")
+                let numAssists = count_goals_assists("assistBy")
+                %>
+
+                <% if(numGoals > 0){ %>
+                    <li class="li-nums<%= whichTeam %>" id="num-goals">
+                        <%= numGoals %>
+                    </li>
+                <% } %>
+                <% if(numAssists > 0){ %>
+                    <li class="li-nums<%= whichTeam %>" id="num-assists">
+                        <%= numAssists %>
+                    </li>
+                <% } %>
+
+                <% 
+                let count_blocks_turnovers = (nameBy) =>{
+                    return scoredPoints.filter(scoredPoint => scoredPoint[nameBy].some(idNameBy => idNameBy === player.playerId)).length;
+                } 
+                let numBlocks = count_blocks_turnovers("blockPlayers")
+                let numTurnovers = count_blocks_turnovers("turnoverPlayers")
+                %>
+
+                <% if(numBlocks > 0){ %>
+                    <li class="li-nums<%= whichTeam %>" id="num-blocks">
+                        <%= numBlocks %>
+                    </li>
+                <% } %>
+                <% if(numTurnovers > 0){ %>
+                    <li class="li-nums<%= whichTeam %>" id="num-turnovers">
+                        <%= numTurnovers %>
+                    </li>
+                <% } %>
+
+                <li>
+                    
+                </li>
+            </ul>
+        </td>
+        <% if(team2Players.some(player2 => player2.playerId === player.playerId)){ %>
+            <td class="table-data-name-team2">
+                <%= player.name %>
+            </td>
+        <% } %>    
+        <% if(team2Players.some(player2 => player2.playerId === player.playerId)){ %>
+            <td class="table-data-id-team2">
+                <%= player.jerseyNumber %>
+            </td>
+        <% } %>
+    </tr>
+<% }) %>
+</table>
+</div>
+<% }) %>
+
+
+
+
+
+
+
+<table class="table-scored-points">
+    <thead class="table-head-scored-points">
+        <tr class="table-row-header-scored-points">
+            <th class="table-header-team1">Pass</th>
+            <th class="table-header-team1">Turn</th>
+            <th class="table-header-team1">O/D</th>
+            <th class="table-header-score">Score</th>
+            <th class="table-header-team2">O/D</th>
+            <th class="table-header-team2">Turn</th>
+            <th class="table-header-team2">Pass</th>
+        </tr>
+    </thead>
+<% scoredPoints.forEach(SP =>{ %>
+    <tr class="table-row-data-scored-points">
+        <td class="table-data-team1"><%= SP.team1Passes %></td>
+        <td class="table-data-team1"><%= SP.team1Turnovers %></td>
+        <td class="table-data-team1"><%= SP.team1OorD.toLowerCase() %></td>
+        <td class="table-data-score"><%= SP.team1Score %> - <%= SP.team2Score %></td>
+        <td class="table-data-team2"><%= SP.team2OorD.toLowerCase() %></td>
+        <td class="table-data-team2"><%= SP.team2Turnovers %></td>
+        <td class="table-data-team2"><%= SP.team2Passes %></td>
+    </tr>
+<% }) %>
+</table> 
+
+
+
+</div>
+</main>
+
+<%- include("./partials/foot.ejs") %>
+    

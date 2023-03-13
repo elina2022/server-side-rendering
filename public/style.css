@@ -1,0 +1,387 @@
+/* https://www.uplabs.com/posts/golf-app-interface */
+
+
+:root{
+    /* --bg: #217215;
+    --accent-1: white;
+    --accent-2: rgb(27, 27, 135);
+    --accent-3: rgb(187, 14, 14);
+    --accent-4: black; */
+    
+    --bg: #217215;
+    --accent-1: #f5cd55;
+    --accent-2: #001f00;
+    --accent-3: #fff6dc;
+    --accent-4: black;
+
+    /* --bg: #ffebc1;
+    --accent-1: #f5cd55;
+    --accent-2: #001f00;
+    --accent-3: #fff6dc;
+    --accent-4: black; */
+
+    --male: rgb(111, 111, 252);
+    --female: rgb(227, 104, 124);
+
+    --num1: red;
+    --num2: blue;
+    --num3: rgb(255, 149, 36);
+    --num4: purple;
+
+    /* --bg: #f0e6b4;
+    --accent-1: #f3a152;
+    --accent-2: #418465;
+    --accent-3: #551B00;
+    --accent-4: #3f3d41; */
+}
+
+body,
+* {
+    color: var(--accent-3);
+    box-sizing: border-box;
+    text-decoration: none;
+    list-style-type: none;
+    padding-inline-start: 0;
+    font-family: 'play', sans-serif;
+    font-weight: 100;
+}
+
+body {
+    background-color: var(--bg);
+    margin: auto;
+    max-width: 90vw;
+    margin-top: 0rem;
+    overflow-x: hidden;
+}
+
+#grain{
+    background:
+        repeating-radial-gradient(#000 0 0.0001%, #fff 0 0.0002%) 50% 0/2500px 2500px,
+        repeating-conic-gradient(#000 0 0.0001%, #fff 0 0.0002%) 60% 60%/2500px 2500px;
+    background-blend-mode: difference;
+    animation: noise 1s infinite;
+    width: 110vw;
+    height: 110vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    opacity: .05;
+    pointer-events: none;
+    z-index: 100;
+}
+
+@keyframes noise {
+    100% {
+        background-position: 50% 0, 60% 50%
+    }
+}
+.container-logo-game-name{
+    display: flex;
+    justify-content: space-between;
+    max-width: 85vw;
+    margin: auto;
+    /* background-color: red; */
+    height: 5rem;
+}
+
+.container-logo-text{
+    display: flex;
+    align-items: center;
+    column-gap: 0rem;
+}
+
+#logo, #logo-text{
+    /* dark green */
+    /* filter: invert(9%) sepia(22%) saturate(5143%) hue-rotate(86deg) brightness(91%) contrast(105%); */
+    /* whiteish */
+    /* filter: invert(92%) sepia(25%) saturate(390%) hue-rotate(319deg) brightness(105%) contrast(103%); */
+    /* yellow */
+    filter: invert(96%) sepia(81%) saturate(5884%) hue-rotate(317deg) brightness(105%) contrast(92%);
+}
+
+#logo{
+    width: 2rem;
+}
+
+#logo-text{
+    width: 10rem;
+}
+
+#game-name-header{
+    text-transform: uppercase;
+    font-size: 2rem;
+    /* transform: translateY(-.5rem); */
+    color: var(--accent-1);
+}
+
+nav{
+    color: var(--bg);
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--accent-1);
+    line-height: 0rem;
+    width: 100vw;
+    margin-left: -5vw;
+    padding: 0 2.5vw;
+}
+
+.nav-ul{
+    padding: 0;
+    display: flex;
+    column-gap: 2rem;
+}
+
+.nav-item, #admin-name{
+    font-weight: bold;
+    color: var(--bg);
+    position: relative;
+    cursor: pointer;
+}
+
+.arrow{
+    position: absolute;
+    width: .6rem;
+    right: -1rem;
+    rotate: 270deg;
+    filter: invert(31%) sepia(98%) saturate(497%) hue-rotate(68deg) brightness(89%) contrast(91%);
+    transform: translateX(.2rem);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.container-score-board{
+    margin-top: 6rem;
+    max-width: 85vw;
+    margin-left: 2.5vw;
+    position: relative;
+}
+
+.container-flag-team-name{
+    display: flex;
+    justify-content: center;
+}
+
+#container-flag-team-name-1, #container-flag-team-name-2{
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    position: relative;
+}
+
+#flag-1, #flag-2{
+    height: 9rem;
+    width: 10rem;
+    position: absolute;
+}
+
+#flag-1{
+    left: -7vw;
+}
+
+#flag-2{
+    right: -7vw;
+}
+
+#team-name-1, #team-name-2{
+    background-color: var(--accent-2)gamesta;
+    /* color: var(--accent-1); */
+    white-space: nowrap;
+    margin: 0;
+    width: 36vw;
+    padding: .2rem 0;
+}
+
+#team-name-1{
+    padding-left: 5vw;
+}
+
+#team-name-2{
+    padding-right: 5vw;
+    text-align: right;
+}
+
+#container-img-score{
+    position: absolute;
+    top: 48%;
+    left: 49%;
+    transform: translate(-49%, -48%);
+}
+
+#frisbee-man{
+    width: 15rem;
+}
+
+#container-score{    
+    position: absolute;
+    top: 79.5%;
+    left: 38%;
+    transform: translate(-38%, -79.5%);
+    backdrop-filter: blur(.8rem);
+    -webkit-backdrop-filter: blur(.4rem);
+    /* background: rgba(0, 0, 0, 0.5); */
+    width: 17.7rem;
+    height: 3rem;
+    clip-path: circle(40% at 50% -70%);
+}
+
+#score{
+    position: absolute;
+    top: 65%;
+    left: -3%;
+    transform: translate(-3%, -65%);
+    width: 17.7rem;
+    height: 3rem;
+    color: var(--accent-3);
+    font-size: 2rem;
+    text-align: center;
+}
+
+
+
+
+
+
+
+
+main{
+    margin-bottom: 5rem;
+}
+
+.container-tables{
+    display: flex;
+    justify-content: space-between;
+    max-width: 85vw;
+    margin: auto;
+    margin-top: 7rem;
+
+}
+
+.table-scored-points{
+    order: 2;
+    background: rgba(255, 255, 255, 0.1);
+    border-spacing: 1rem;
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+}
+
+.table-header-team1, .table-header-team2, .table-data-team1, .table-data-team2, .table-header-score, .table-data-score{
+    border-bottom: .5rem solid ;
+    /* text-align: center; */
+}
+
+.table-header-score, .table-header-team1, .table-header-team2{
+    border-color: var(--accent-1);
+}
+
+
+.table-header-score, .table-data-score{
+    text-align: center;
+}
+
+.table-header-team2, .table-data-team2{
+    text-align: right;
+}
+
+
+
+/* 
+.table-team1{
+    order: 1;
+}
+
+.table-team2{
+    order: 3;
+} */
+
+.container-table-team1{
+    order: 1;
+}
+
+.container-table-team2{
+    order: 3;
+}
+
+.container-table-team1, .container-table-team2{
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 1rem 2rem;
+    border-radius: 1rem;
+}
+
+.table-team1, .table-team2{
+    border-collapse: collapse;
+}
+
+.table-row-team1-male, .table-row-team2-male{
+    background-image: linear-gradient(to bottom, transparent 50%, var(--male) 50%, var(--male) 80%, transparent 80%);
+}
+
+.table-row-team1-female, .table-row-team2-female{
+    background-image: linear-gradient(to bottom, transparent 50%, var(--female) 50%, var(--female) 80%, transparent 80%);
+}
+
+.table-data-id-team1, .table-data-id-team2, .table-data-name-team1, .table-data-name-team2, .table-data-nums-teams1, .table-data-nums-teams2{
+    /* background-color: red; */
+    line-height: 2.5rem;
+}
+
+.table-data-id-team1{
+    padding-right: 1.5rem;
+    padding-left: 1rem;
+}
+
+.table-data-id-team2{
+    padding-left: 1.5rem;
+    padding-right: 1rem;
+}
+
+.table-data-name-team1{
+    padding-right: 2rem;
+}
+
+.table-data-name-team2{
+    padding-left: 2rem;
+}
+
+.table-data-nums-team1{
+    padding-right: 1rem;
+}
+
+.table-data-nums-team2{
+    padding-left: 1rem;
+}
+
+
+.table-data-name-team2, .table-data-id-team2{
+    text-align: right;
+}
+
+.ul-nums-team1, .ul-nums-team2{
+    display: flex;
+    column-gap: .5rem;
+    margin: 0;
+}
+
+.ul-nums-team1{
+    justify-content: end;
+}
+
+.li-nums-team1, .li-nums-team2{
+    padding: .2rem .5rem;
+    margin-bottom: .6rem;
+    box-shadow: inset 0rem 0rem .5rem 0rem white;
+    border-radius: 1rem;
+}
+
+#num-goals{ background-color: var(--num1) }
+#num-assists{ background-color: var(--num2) }
+#num-blocks{ background-color: var(--num3) }
+#num-turnovers{ background-color: var(--num4) }
