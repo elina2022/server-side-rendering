@@ -1,4 +1,5 @@
 <%- include("./partials/head.ejs") %>
+
 <div id="grain"></div>
 
 <header>
@@ -28,16 +29,20 @@
 <div class="container-score-board">
     <div class="container-flag-team-name">
         <div id="container-flag-team-name-1">
-            <img id="flag-1" src="https://flagsapi.com/<%= team1CountryISO2Code %>/flat/64.png" alt="">
+            <div id="container-flag-1">
+                <img id="flag-1" src="https://flagsapi.com/<%= team1CountryISO2Code %>/flat/64.png" alt="">
+            </div>
             <h1 id="team-name-1">(<%= team1CountryOlympicCode %>) <%= team1Name %></h1>
         </div>
         <div id="container-flag-team-name-2">
             <h1 id="team-name-2"><%= team2Name %> (<%= team2CountryOlympicCode %>)</h1>
-            <img id="flag-2" src="https://flagsapi.com/<%= team2CountryISO2Code %>/flat/64.png" alt="">
+            <div id="container-flag-2">
+                <img id="flag-2" src="https://flagsapi.com/<%= team2CountryISO2Code %>/flat/64.png" alt="">
+            </div>
         </div>
     </div>
     <div id="container-img-score">
-        <img id="frisbee-man" src="/assets/man-frisbee-color-green-beige.png" alt="">
+        <img id="frisbee-man" src="/assets/man-frisbee-color-grey-lightgrey.png" alt="">
         <div id="container-score"></div>
         <p id="score"><%= scoredPoints[scoredPoints.length-1].team1Score %> - <%= scoredPoints[scoredPoints.length-1].team2Score %></p>
     </div>
@@ -66,8 +71,15 @@
             <td class="table-data-name-team1">
                 <%= player.name %>
             </td>
-        <% } %>    
-        <td class="table-data-nums<%= whichTeam %>">
+        <% } %>   
+        <td class="table-data-information-team2">
+            <% if(team2Players.some(player2 => player2.playerId === player.playerId) &&
+            playersIndiv.some(playerIndiv => playerIndiv.id === player.playerId)){ %>
+                    <small id="player" class="information-team2">i</small>
+            <% } %>    
+        </td>
+
+        <td class="table-data-nums<%= whichTeam %>" id="player_stats">
             <ul class="ul-nums<%= whichTeam %>">
                 <% 
                 let count_goals_assists = nameBy =>{
@@ -78,12 +90,12 @@
                 %>
 
                 <% if(numGoals > 0){ %>
-                    <li class="li-nums<%= whichTeam %>" id="num-goals">
+                    <li class="li-nums<%= whichTeam %>" id="goals">
                         <%= numGoals %>
                     </li>
                 <% } %>
                 <% if(numAssists > 0){ %>
-                    <li class="li-nums<%= whichTeam %>" id="num-assists">
+                    <li class="li-nums<%= whichTeam %>" id="assists">
                         <%= numAssists %>
                     </li>
                 <% } %>
@@ -97,12 +109,12 @@
                 %>
 
                 <% if(numBlocks > 0){ %>
-                    <li class="li-nums<%= whichTeam %>" id="num-blocks">
+                    <li class="li-nums<%= whichTeam %>" id="blocks">
                         <%= numBlocks %>
                     </li>
                 <% } %>
                 <% if(numTurnovers > 0){ %>
-                    <li class="li-nums<%= whichTeam %>" id="num-turnovers">
+                    <li class="li-nums<%= whichTeam %>" id="turnovers">
                         <%= numTurnovers %>
                     </li>
                 <% } %>
@@ -112,6 +124,13 @@
                 </li>
             </ul>
         </td>
+        <td class="table-data-information-team1">
+            <% if(team1Players.some(player1 => player1.playerId === player.playerId) &&
+            playersIndiv.some(playerIndiv => playerIndiv.id === player.playerId)){ %>
+                <small id="player" class="information-team1">i</small>
+            <% } %>
+        </td>
+
         <% if(team2Players.some(player2 => player2.playerId === player.playerId)){ %>
             <td class="table-data-name-team2">
                 <%= player.name %>
@@ -129,40 +148,91 @@
 <% }) %>
 
 
+<div class="container-legend-table">
 
+    <div class="container-table-score">
 
+        <div class="container-points-stats-config">
+            <button class="points-stats-config" id="points">Points
+            </button>
+            <button class="points-stats-config" id="stats">Stats
+            </button>
+            <button class="points-stats-config" id="config">Config
+            </button>
+        </div>
 
-
-<div class="container-table-score">
-    <table class="table-scored-points">
-        <thead class="table-head-scored-points">
-            <tr class="table-row-header-scored-points">
-                <th class="table-header-team1">Pass</th>
-                <th class="table-header-team1">Turn</th>
-                <th class="table-header-team1">O/D</th>
-                <th class="table-header-score">Score</th>
-                <th class="table-header-team2">O/D</th>
-                <th class="table-header-team2">Turn</th>
-                <th class="table-header-team2">Pass</th>
+        <table class="table-scored-points all_blocks" id="points_block">
+            <thead>
+                <tr class="table-row-header-scored-points">
+                    <th class="table-header-team1">Pass</th>
+                    <th class="table-header-team1">Turn</th>
+                    <th class="table-header-team1">O/D</th>
+                    <th class="table-header-score">Score</th>
+                    <th class="table-header-team2">O/D</th>
+                    <th class="table-header-team2">Turn</th>
+                    <th class="table-header-team2">Pass</th>
+                </tr>
+            </thead>
+        <% scoredPoints.forEach(SP =>{ %>
+            <tr class="table-row-data-scored-points">
+                <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Passes %></td>
+                <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Turnovers %></td>
+                <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1OorD.toLowerCase() %></td>
+                <td class="table-data-score"><%= SP.team1Score %> - <%= SP.team2Score %></td>
+                <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2OorD.toLowerCase() %></td>
+                <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Turnovers %></td>
+                <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Passes %></td>
             </tr>
-        </thead>
-    <% scoredPoints.forEach(SP =>{ %>
-        <tr class="table-row-data-scored-points">
-            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Passes %></td>
-            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1Turnovers %></td>
-            <td class="table-data-team1 <%= SP.team1Class %>"><%= SP.team1OorD %></td>
-            <td class="table-data-score"><%= SP.team1Score %> - <%= SP.team2Score %></td>
-            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2OorD %></td>
-            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Turnovers %></td>
-            <td class="table-data-team2 <%= SP.team2Class %>"><%= SP.team2Passes %></td>
-        </tr>
-    <% }) %>
-    </table> 
+        <% }) %>
+        </table> 
+
+        <div id="stats_block" class="all_blocks">
+            Put stats here
+        </div>
+
+        <div id="config_block" class="all_blocks">
+            <form>
+                <input type="checkbox" id="checkbox_player_stats" checked>
+                <label for="checkbox_player_stats">Show player stats</label>    
+                <input type="checkbox" id="checkbox_legend" checked>
+                <label for="checkbox_legend">Show legend</label>    
+            </form>
+        </div>
+        
+
+        
+        <% playersIndiv.forEach(playerIndiv =>{ %>
+
+            <div id="player_block" class="all_blocks">
+
+                <% playerIndiv.info.forEach(playerInfo => { %>
+                    <%= playerInfo.question %> :
+                    <%= playerInfo.answer %> <br>
+                <% }) %>
+
+            </div>
+            
+        <% }) %>
+
+        
+    </div>
+
+
+    <div class="container-legend">
+        <ul class="legend-list">
+            <li class="legend-item" id="goals">Goals</li>
+            <li class="legend-item" id="assists">Assists</li>
+            <li class="legend-item" id="blocks">Blocks</li>
+            <li class="legend-item" id="turnovers">Turnovers</li>
+        </ul>    
+    </div>
+
 </div>
+
+
 
 
 </div>
 </main>
 
 <%- include("./partials/foot.ejs") %>
-    

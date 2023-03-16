@@ -12,17 +12,22 @@ app.use((req, res, next) => {
 })
 
 let data
+let getData = pathApi => JSON.parse(fs.readFileSync('./public/api/' + pathApi + '.json').toString())
+
 try {
-    const data1 = JSON.parse(fs.readFileSync('./public/api/game/943.json').toString())
-    const data2 = JSON.parse(fs.readFileSync('./public/api/game/943/statistics.json').toString())
-    data = Object.assign({}, data1, data2)
+    const data1 = getData("game/943")
+    const data2 = getData("game/943/statistics")
+    const players = getData("facts/players-extra")
+    // const player1 = getData("facts/Player/8602")
+    // const player2 = getData("facts/Player/8607")
+    // const player3 = getData("facts/Player/17373")
+    data = Object.assign({}, data1, data2, players)
     console.log(data) 
 } catch (err) {
-    console.error(err)
+    console.error(err) 
 }
 
 app.get('/', async (req, res) => {
-
     res.render('index', data)
 })
 
@@ -46,3 +51,7 @@ app.use((req, res) => {
 // } catch (err) {
 //     console.error(err);
 // }
+
+
+
+// && fs.existsSync("/api/facts/Player/" + player.playerId + ".json")
